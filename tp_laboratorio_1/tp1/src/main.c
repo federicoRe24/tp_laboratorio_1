@@ -19,12 +19,13 @@ int main(void){
 
 	do
 	{
+		printf("Número A: %.2f\n", numero1);
+		printf("Número B: %.2f\n", numero2);
 		respuesta = getInt("Seleccione una opción\n\n1-Ingresar 1er operando\n2-Ingresar 2do operando\n3-Calcular operaciones\n4-Informar resultados\n5-Salir\n",
 							"No es una opción válida\n",&opcion,3,5,1);
 		if(!respuesta)
 		{
-			printf("Número A: %.2f\n", numero1);
-			printf("Número A: %.2f\n", numero2);
+
 			switch(opcion)
 			{
 				case 1:
