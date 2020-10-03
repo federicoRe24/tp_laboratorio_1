@@ -134,7 +134,7 @@ indicate UP or DOWN order
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
-int sortEmployees(Employee* list, int len, int order) //Ordena solo por apellido ASC
+int sortEmployees(Employee* list, int len, int order)
 {
 	int flagSwap;
 	int i;
@@ -147,10 +147,10 @@ int sortEmployees(Employee* list, int len, int order) //Ordena solo por apellido
 		do
 		{
 			flagSwap=0;
-			for(i=0;i<len;i++)
+			for(i=0;i<len-1;i++)
 			{
 				contador++;
-				if(list[i].lastName < list[i+1].lastName)
+				if(strncmp(list[i].lastName,list[i+1].lastName,LONG_NOMBRE)>0)
 				{
 					flagSwap = 1;
 					buffer = list[i];
@@ -195,13 +195,13 @@ int CargarEmpleado(Employee* list, int len)
 	int resultado;
 	Employee bufferEmployee;
 
-	resultado =  getNombre("Ingrese el nombre del empleado\n", "Debe ingresar un nombre válido\n", &bufferEmployee.name,
+	resultado =  getNombre("Ingrese el nombre del empleado\n", "Debe ingresar un nombre válido\n", bufferEmployee.name,
 			3, LONG_NOMBRE);
 
 	if(resultado == -1)
 		return 1;
 
-	resultado =  getNombre("Ingrese el apellido del empleado\n", "Debe ingresar un apellido válido\n", &bufferEmployee.lastName,
+	resultado =  getNombre("Ingrese el apellido del empleado\n", "Debe ingresar un apellido válido\n", bufferEmployee.lastName,
 			3, LONG_NOMBRE);
 
 	if(resultado == -1)
@@ -253,14 +253,14 @@ int ModificarEmpleado(Employee* list, int len)
 				switch(opcion)
 				{
 					case 1:
-						resultado =  getNombre("Ingrese el nombre del empleado\n", "Debe ingresar un nombre válido\n", &bufferEmployee.name,
+						resultado =  getNombre("Ingrese el nombre del empleado\n", "Debe ingresar un nombre válido\n", bufferEmployee.name,
 								3, LONG_NOMBRE);
 						if(resultado == -1)
 							return 1;
 						strncpy(list[posicion].name,bufferEmployee.name,sizeof(LONG_NOMBRE));
 						break;
 					case 2:
-						resultado =  getNombre("Ingrese el apellido del empleado\n", "Debe ingresar un apellido válido\n", &bufferEmployee.lastName,
+						resultado =  getNombre("Ingrese el apellido del empleado\n", "Debe ingresar un apellido válido\n", bufferEmployee.lastName,
 								3, LONG_NOMBRE);
 						if(resultado == -1)
 							return 1;
@@ -294,8 +294,9 @@ int ModificarEmpleado(Employee* list, int len)
 	return retorno;
 }
 
-void BorrarEmpleado(Employee* list, int len)
+int BorrarEmpleado(Employee* list, int len)
 {
+	int retorno = -1;
 	int resultado;
 	int id;
 
@@ -307,6 +308,7 @@ void BorrarEmpleado(Employee* list, int len)
 		if(resultado == 0)
 		{
 			printf("Empleado eliminado\n");
+			retorno = 0;
 		}
 		else
 		{
@@ -317,6 +319,7 @@ void BorrarEmpleado(Employee* list, int len)
 	{
 		printf("No se ingresó un id válido\n");
 	}
+	return retorno;
 }
 
 /**

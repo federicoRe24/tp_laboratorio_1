@@ -33,7 +33,7 @@ int findEmployeeById(Employee* list, int len,int id);
 int removeEmployee(Employee* list, int len, int id);
 int sortEmployees(Employee* list, int len, int order);
 int printEmployees(Employee* list, int length);
-void BorrarEmpleado(Employee* list, int len);
+int BorrarEmpleado(Employee* list, int len);
 int CargarEmpleado(Employee* list, int len);
 int ModificarEmpleado(Employee* list, int len);
 
